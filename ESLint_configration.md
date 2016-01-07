@@ -4,7 +4,7 @@
 
 当`C语言`刚成为计算机语言的时候，有一些常见的错误不能够被原始的编译器捕捉，所以一个名为Lint的辅助程序被开发出来，用来扫面源文件中的错误。
 
-在Douglas Rockford 的**<JavaScript： The Good Parts>**也提到，JavaScript是一门「年轻的语言」，因此也就存在很多糟粕的地方，这些糟粕使得程序员在编写JavaScript代码的时候，容易出错，而不易被编辑器或程序员本身发现。于是Douglas Crockford亲自操刀，编写了JSLint代码规范检测工具，其认为JSLint是JavaScript的一个更加严格的子集，也就是他说的Good Parts，使用JSLint就能够检测我们在编程过程中无意得使用了一些「糟粕」的地方，避免了程序出错。
+在Douglas Rockford 的**\<JavaScript： The Good Parts>**也提到，JavaScript是一门「年轻的语言」，因此也就存在很多糟粕的地方，这些糟粕使得程序员在编写JavaScript代码的时候，容易出错，而不易被编辑器或程序员本身发现。于是Douglas Crockford亲自操刀，编写了JSLint代码规范检测工具，其认为JSLint是JavaScript的一个更加严格的子集，也就是他说的Good Parts，使用JSLint就能够检测我们在编程过程中无意得使用了一些「糟粕」的地方，避免了程序出错。
 
 而ESLint是Nicholas C.Zakas编写的另外一份JavaScript代码规范检测工具，这当然不是重复得造轮子（大神不屑造轮子，大神一般都是重新发现轮子），在使用JSLint的时候，JSLint不是以插件的形式实现的，而是重新包装一个工具，可能Nicholas C.Zakas不喜欢这种方式，其认为代码规范检测工具（ESLint）应该是可插拔（使用插件），可配置的，于是自己便高高兴兴去写ESLint了。
 
@@ -209,129 +209,154 @@
    
    下面举个栗子：
    
-   ``` 
+   \```
+
    ---
-     env:
-       browser: true
-       node: true
-       es6: true
-   ```
-   
+
+``` 
+ env:
+   browser: true
+   node: true
+   es6: true
+```
+
+``` 
+
    上面的例子说明，我们的代码可能会运行在浏览器环境、node环境或es6环境。
-   
+
    4）指定额外全局变量（Specifying Globals）
-   
+
    `no-undef`规则在我们使用没有在同一文件中定义的变量的时候会报错，当我们使用了全局变量的时候，我们就有必要对额外的全局变量进行配置，避免`no-undef`误会。我们可以通过代码注释或者配置文件来进行此项配置。举个栗子：
-   
-   ``` 
+
+```
+
    ---
-     globals:
-       var1: true
-       var2: false
-   ```
-   
+
+``` 
+ globals:
+   var1: true
+   var2: false
+```
+
+``` 
+
    5) 引入插件（Specifying Plugins）
-   
+
    ESLint一个优越的地方就是可以使用第三方插件，在使用插件之前，首先需要通过npm安装需要使用的插件。通过`plugins` 键名来指定插件，插件名前面的前缀`eslint-plugin-` 可以省略：举个栗子：
-   
-   ``` 
+
+```
+
    ---
-     plugins:
-       - plugin1
-       - eslint-plugin-plugin2
-   ```
-   
+
+``` 
+ plugins:
+   - plugin1
+   - eslint-plugin-plugin2
+```
+
+``` 
+
    **注意：全局安装的ESLint，插件也需要全局安装，本地安装的ESLint，插件既可以本地安装也可以全局安装。
-   
+
    5）配置Rules （Configuring Rules）
-   
+
    **重要的东西往往放在最后，配置Rules也就是整个配置文件的核心部分。
-   
+
    在ESLint中拥有大量的rules（后面将不再对rules进行翻译），你可以通过在javascript文件中注释或者特定的配置文件来指定和修改项目中需要rules。在进行一条rule配置时，我们需要设置rule ID为如下值：
-   
+
    0 - turn the rule off //关掉此条规则
-   
+
    1 - turn the rule on as a warning (doesn't affect exit code) // 把这条规则指定为warning
-   
+
    2 - turn the rule on as an error (exit code is 1 when triggered) //把这条rule指定为error
-   
+
    同时对于某些rule，在制定上面警告级别的时候，还可以指定其他的选项。举个栗子：
-   
-   ``` 
+
+```
+
    ---
-     rules:
-       eqeqeq: 0
-       curly: 2
-       quotes:
-         - 2
-         - "double"
-   ```
-   
+
+``` 
+ rules:
+   eqeqeq: 0
+   curly: 2
+   quotes:
+     - 2
+     - "double"
+```
+
+``` 
+
    如果一条rule是通过plugin引入的，那么在配置此条rule的时候需要在rule ID前面加plugin 名和 `/` 举个栗子：
-   
-   ``` 
+
+```
+
    ---
-     plugins:
-       - plugin1
-     rules:
-       eqeqeq: 0
-       curly: 2
-       quotes:
-         - 2
-         - "double"
-       plugin1/rule1: 2
-   ```
-   
+
+``` 
+ plugins:
+   - plugin1
+ rules:
+   eqeqeq: 0
+   curly: 2
+   quotes:
+     - 2
+     - "double"
+   plugin1/rule1: 2
+```
+
+``` 
+
    **注意：在制定plugin中的rule时，我们需要把plugin的前缀`aslant-plugin-` 去掉。
-   
+
    **所有的rules，其默认值设置为2.可以通过设置rule为1或者0来对其进行警告降级。
-   
+
    **关于具体的每一条rule的解释和使用，我会另外整理一份详尽文档，这儿就不在赘述
-   
+
    6）配置文件的格式问题
-   
+
    ESLint 支持多种配置文件格式
-   
+
    **JavaScript** - use `.eslintrc.js` and export an object containing your configuration.
-   
+
    **YAML** - use `.eslintrc.yaml` or `.eslintrc.yml` to define the configuration structure.
-   
+
    **JSON** - use `.eslintrc.json` to define the configuration structure. ESLint's JSON files also allow JavaScript-style comments.
-   
+
    **package.json** - create an `eslintConfig` property in your `package.json` file and define your configuration there.
-   
+
    **Deprecated** - use `.eslintrc`, which can be either JSON or YAML.
-   
+
    **如果我们的项目中有多个配置文件，同时又有`.eslintrc` 文件，ESLint会只使用`.eslintrc`文件。配置文件的优先级如下（下面的优先级最高，个人建议就在`.eslintrc`中配置就可以了）：
-   
+
    `.eslintrc.js`
-   
+
    `.eslintrc.yaml`
-   
+
    `.eslintrc.yml`
-   
+
    `.eslintrc.json`
-   
+
    `.eslintrc`
-   
+
    7）配置文件的扩展（Extending Configuration Files）
-   
+
    如果需要扩展一个特定的配置文件，只需要在配置文件中增加extends项就可以了，引用的路径既可以是相对路径也可以是绝对路径。举个栗子：
-   
+
    ``` javascript
    {
        "extends": "./node_modules/coding-standard/.eslintrc",
-   
+
        "rules": {
            // Override any settings from the "parent" configuration
            "eqeqeq": 1
        }
    }
-   ```
-   
+```
+
    `extends` 也可以接受一个数组，数组后面的文件会重写数组前面文件中的rule，举个栗子：
-   
-   ``` javascript
+
+``` javascript
    {
        "extends": [
            "./node_modules/coding-standard/eslintDefaults.js",
@@ -340,34 +365,34 @@
            // Override .eslintrc-es6
            "./node_modules/coding-standard/.eslintrc-jsx",
        ],
-   
+
        "rules": {
            // Override any settings from the "parent" configuration
            "eqeqeq": 1
        }
    }
-   ```
-   
+```
+
    `extends` 亦可以用来引用一些在github上面共享的配置包，首先需要通过npm安装配置包文件，其次就可以像如下栗子引用了：
-   
-   ``` javascript
+
+``` javascript
    {
        "extends": "eslint-config-myrules",
-   
+
        "rules": {
            // Override any settings from the "parent" configuration
            "eqeqeq": 1
        }
    }
-   ```
-   
+```
+
    **在扩展shareable的配置时，`aslant-config-` 也可以去掉，ESLint会自己帮我们加上的，如果想了解插件和Shareable Configs具体工作原理，请点击 [Shareable Configs](http://eslint.org/docs/developer-guide/shareable-configs) 。
-   
+
    8）怎么在配置文件中写注释
-   
+
    可以使用JavaScript或者YAML的代码注释风格，举个栗子：
-   
-   ``` 
+
+``` 
    {
        "env": {
            "browser": true
@@ -378,42 +403,42 @@
            "strict": 0
        }
    }
-   ```
-   
+```
+
    9) 怎么制定ESLint忽略检测的文件或路径
-   
+
    我们可以通过生成一个`.eslintignore`文件来告诉ESLint我们需要忽略检测哪些文件或者文件夹中的所有文件。在`.eslintignore`文件中，每一行就是表示需要ESLint忽略文件的路径，举个栗子：
-   
-   ``` 
+
+``` 
    **/*.js
-   ```
-   
+```
+
    当ESLint运行的时候，它会执行代码规范检测之前查找当前工作文件夹中的`.eslintignore`文件，当该文件找到后，ESLint运行时就会忽略该文件中的制定文件或文件夹，一个文件夹下只能够有一个`.eslintignore`文件。
-   
+
    在`.eslintignore`文件中是使用`minimatch`来进行匹配的，因此一些如下特性可以使用：
-   
+
    （1）以`#` 开始的一行会被视为注释，不会对忽略匹配产生影响。
-   
+
    （2）以 `!` 开始的一行是negated patterns。也就是说在我们首先忽略了某个文件夹中的所有文件后，我们又想ESLint检测该文件夹中的某些文件时就可以使用该特性。举个栗子：
-   
-   ``` 
+
+``` 
    # Ignore built files except build/index.js
    build/
    !build/index.js
-   ```
-   
+```
+
    在上面的栗子中，我们依然会对build/index.js文件进行ESLint检测。
-   
+
    （3）大括号语法可以在一个匹配中制定多个文件。举个栗子：
-   
-   ``` 
+
+``` 
    # Ignore files compiled from TypeScript and CoffeeScript
    **/*.{ts,coffee}.js
-   ```
-   
+```
+
    ​
-   
-2. ##### ESLint的使用方法
+
+1. ##### ESLint的使用方法
 
 **我们配置好了文件，怎么去使用配置文件呢。也就是说how to use the Configuration Files？
 
