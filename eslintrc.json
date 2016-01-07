@@ -25,9 +25,7 @@
   "parser": "babel-eslint",
 
   "rules": {
-    //Enforces getter/setter pairs in objects
     "accessor-pairs": 2, 
-    //require space before/after arrow function's arrow (fixable)
     "arrow-spacing": [2, { "before": true, "after": true }], 
     "block-spacing": [2, "always"],
     "brace-style": [2, "1tbs", { "allowSingleLine": true }],
