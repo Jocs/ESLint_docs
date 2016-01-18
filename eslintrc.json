@@ -12,8 +12,7 @@
   },
 
   "plugins": [
-    "standard",
-    "react"
+    "standard"
   ],
 
   "globals": {
@@ -77,7 +76,7 @@
     "no-mixed-spaces-and-tabs": 2,
     "no-multi-spaces": 2,
     "no-multi-str": 2,
-    "no-multiple-empty-lines": [2, { "max": 1 }],
+    "no-multiple-empty-lines": [2, { "max": 2 }],
     "no-native-reassign": 2,
     "no-negated-in-lhs": 2,
     "no-new": 2,
@@ -110,7 +109,6 @@
     "no-with": 2,
     "one-var": [2, { "initialized": "never" }],
     "operator-linebreak": [2, "after", { "overrides": { "?": "before", ":": "before" } }],
-    "padded-blocks": [2, "never"],
     "quotes": [2, "single", "avoid-escape"],
     "radix": 2,
     "semi": [2, "always"],
