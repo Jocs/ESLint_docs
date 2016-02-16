@@ -85,15 +85,15 @@ module.exports = {
 
 ```
 
-## Language Options
+## 语言配置项
 
-Prior to 2.0.0, the way to enable language options was by using `ecmaFeatures` in your configuration. In 2.0.0:
+在2.0.0版本之前，启动语言配置项是通过在配置文件中添加`ecmaFeatures`配置项来实现的。而在2.0.0版本，发生了如下变化：
 
-- The `ecmaFeatures` property is now under a top-level `parserOptions` property.
-- All ECMAScript 6 `ecmaFeatures` flags have been removed in favor of a `ecmaVersion` property under `parserOptions` that can be set to 3, 5 (default), or 6.
-- The `ecmaFeatures.modules` flag has been replaced by a `sourceType` property under `parserOptions` which can be set to `"script"` (default) or`"module"` for ES6 modules.
+- `ecmaFeatures` 配置项现从属于`parserOptions`配置属性下面。
+- 所有的ECMAScript 6 标记的`ecmaFeatures` 都被移除，并被一个`parserOptions` 下面的`ecmaVersion`配置项所替代，该配置项可以被设置为如下值：3， 5（默认值）或者 6.
+- `ecmaFeatures.modules`标记被`parserOptions`配置项下面的`sourceType`属性所替代，该属性可能的取值包括`"script"`(默认值)和`"module"` 用于启动ES6中的modules特性。
 
-**To address:** If you are using any ECMAScript 6 feature flags in `ecmaFeatures`, you'll need to use `ecmaVersion: 6` instead. The ECMAScript 6 feature flags are:
+**解决方案：** 如果你在`ecmaFeatures`中使用了ECMAScript 6 特性标签，那么你需要使用`ecmaVersion: 6` 来替换之前配置，ECMAScript 6特性标签列表如下：
 
 - `arrowFunctions` - enable [arrow functions](https://leanpub.com/understandinges6/read#leanpub-auto-arrow-functions)
 - `binaryLiterals` - enable [binary literals](https://leanpub.com/understandinges6/read#leanpub-auto-octal-and-binary-literals)
@@ -117,7 +117,7 @@ Prior to 2.0.0, the way to enable language options was by using `ecmaFeatures`�
 - `templateStrings` - enable [template strings](https://leanpub.com/understandinges6/read/#leanpub-auto-template-strings)
 - `unicodeCodePointEscapes` - enable [code point escapes](https://leanpub.com/understandinges6/read/#leanpub-auto-escaping-non-bmp-characters)
 
-If you're using any of these flags, such as:
+如果你使用了以上标签，如下：
 
 ``` 
 {
@@ -125,10 +125,9 @@ If you're using any of these flags, such as:
         arrowFunctions: true
     }
 }
-
 ```
 
-Then you should enable ES6 using `ecmaVersion`:
+那么为了使用ES 6,你需要设置 `ecmaVersion`:
 
 ``` 
 {
@@ -136,10 +135,9 @@ Then you should enable ES6 using `ecmaVersion`:
         ecmaVersion: 6
     }
 }
-
 ```
 
-If you're using any non-ES6 flags in `ecmaFeatures`, you need to move those inside of `parserOptions`. For instance:
+如果你在`ecmaFeatures`中使用了非ES6标签，那么你需要把这些标签迁移到`parserOptions`配置项中，例如：
 
 ``` 
 {
@@ -150,7 +148,7 @@ If you're using any non-ES6 flags in `ecmaFeatures`, you need to move those ins
 
 ```
 
-Then you should move `ecmaFeatures` under `parserOptions`:
+然后你需要把 `ecmaFeatures` 迁移到 `parserOptions`配置项之下:
 
 ``` 
 {
@@ -160,10 +158,9 @@ Then you should move `ecmaFeatures` under `parserOptions`:
         }
     }
 }
-
 ```
 
-If you were using `ecmaFeatures.modules` to enable ES6 module support like this:
+若果你使用了 `ecmaFeatures.modules` 来启动ES6 module，那么需要做如下修改：
 
 ``` 
 {
@@ -177,10 +174,9 @@ If you were using `ecmaFeatures.modules` to enable ES6 module support like thi
         sourceType: "module"
     }
 }
-
 ```
 
-Additionally, if you are using `context.ecmaFeatures` inside of your rules, then you'll need to update your code in the following ways:
+除此之外，如果你在规则中使用了 `context.ecmaFeatures` ，那么你需要对你的代码做如下升级：
 
 1. If you're using an ES6 feature flag such as `context.ecmaFeatures.blockBindings`, rewrite to check for`context.parserOptions.ecmaVersion > 5`.
 2. If you're using `context.ecmaFeatures.modules`, rewrite to check that the `sourceType` property of the Program node is `"module"`.
@@ -188,16 +184,15 @@ Additionally, if you are using `context.ecmaFeatures` inside of your rules, th
 
 If you're not using `ecmaFeatures` in your configuration, then no change is needed.
 
-## New Rules in `"eslint:recommended"`
+##  `"eslint:recommended"`中新增规则
 
 ``` 
 {
     "extends": "eslint:recommended"
 }
-
 ```
 
-In 2.0.0, the following 11 rules were added to `"eslint:recommended"`.
+在2.0.0中， `"eslint:recommended"`新增11条规则。
 
 - [constructor-super](http://eslint.org/docs/rules/constructor-super)
 - [no-case-declarations](http://eslint.org/docs/rules/no-case-declarations)
@@ -211,7 +206,7 @@ In 2.0.0, the following 11 rules were added to `"eslint:recommended"`.
 - [no-unexpected-multiline](http://eslint.org/docs/rules/no-unexpected-multiline)
 - [no-unused-labels](http://eslint.org/docs/rules/no-unused-labels)
 
-**To address:** If you don't want to be notified by those rules, you can simply disable those rules.
+解决方案：如果你不想使用这些规则，只需要将这些规则警告级别设置为0，如下：
 
 ``` 
 {
@@ -233,7 +228,7 @@ In 2.0.0, the following 11 rules were added to `"eslint:recommended"`.
 
 ```
 
-## Scope Analysis Changes
+## 作用域解析的变化
 
 We found some bugs in our scope analysis that needed to be addressed. Specifically, we were not properly accounting for global variables in all the ways they are defined.
 
