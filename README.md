@@ -16,7 +16,21 @@
 
 #### 1. 安装依赖：
 
-> npm install —save-dev babel-core babel-eslint eslint eslint-plugin-react eslint-plugin-standard eslint-plugin-promise
+在`package.json`文件中添加如下依赖（如果没有`package.son`文件需首先通过`npm init` 创建`package.son ` 文件）：
+
+``` 
+"devDependencies": {
+    "babel-core": "^6.5.2",
+    "babel-eslint": "^4.1.8",
+    "eslint": "^2.1.0",
+    "eslint-plugin-promise": "^1.0.8",
+    "eslint-plugin-standard": "^1.3.2"
+  }
+```
+
+运行如下命令：
+
+> npm install 
 
 #### 2. 将文件夹中的eslintrc.json文件放置在项目根目录
 
