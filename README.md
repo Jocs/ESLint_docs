@@ -18,7 +18,7 @@
 
 在`package.json`文件中添加如下依赖（如果没有`package.son`文件需首先通过`npm init` 创建`package.son ` 文件）：
 
-``` 
+``` json
 "devDependencies": {
     "babel-core": "^6.5.2",
     "babel-eslint": "^4.1.8",
