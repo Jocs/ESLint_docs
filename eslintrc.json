@@ -56,6 +56,8 @@
     "handle-callback-err": [2, "^(err|error)$" ],
     //这个就是关于用什么来缩进了，规定使用tab 来进行缩进，switch中case也需要一个tab .
     "indent": [2, "tab", { "SwitchCase": 1 }],
+    // keyword 前后需要空格
+    "keyword-spacing": [2, {"before": true, "after": true, "overrides": {}}],
     //该规则规定了在对象字面量语法中，key和value之间的空白，冒号前不要空格，冒号后面需要一个空格
     "key-spacing": [2, { "beforeColon": false, "afterColon": true }],
     //构造函数首字母大写
@@ -88,8 +90,6 @@
     "no-duplicate-case": 2,
     //禁止使用不匹配任何字符串的正则表达式
     "no-empty-character-class": 2,
-    //label 没有和迭代语句或者switch语句一起使用，将会报错
-    "no-empty-label": 2,
     //禁止使用eval函数
     "no-eval": 2,
     //禁止对catch语句中的参数进行赋值
@@ -121,7 +121,7 @@
     //label和var申明的变量不能重名
     "no-label-var": 2,
     //禁止使用label语句
-    "no-labels": 2,
+    "no-labels": [2, {"allowLoop": false, "allowSwitch": false}],
     //禁止使用没有必要的嵌套代码块
     "no-lone-blocks": 2,
     //不要把空格和tab混用
@@ -206,20 +206,14 @@
     "semi": [2, "always"],
     //该规则规定了分号前后的空格，具体规定如下。
     "semi-spacing": [2, { "before": false, "after": true }],
-    //关键词后面需要加空格
-    "space-after-keywords": [2, "always"],
     //代码块前面需要加空格
     "space-before-blocks": [2, "always"],
     //函数圆括号前面需要加空格
     "space-before-function-paren": [2, "never"],
-    //关键词前面需要加空格
-    "space-before-keywords": [2, "always"],
     //圆括号内部不需要加空格
     "space-in-parens": [2, "never"],
     //操作符前后需要加空格
     "space-infix-ops": 2,
-    //return、throw、case后面需要一个空格
-    "space-return-throw-case": 2,
     //一元操作符前后是否需要加空格，单词类操作符需要加，而非单词类操作符不用加
     "space-unary-ops": [2, { "words": true, "nonwords": false }],
     //评论符号｀／*｀ ｀／／｀，后面需要留一个空格
