@@ -1,8 +1,11 @@
 {
-  "ecmaFeatures": {
-    "modules": true,
-    "experimentalObjectRestSpread": true,
-    "jsx": true
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "jsx": true
+    },
+    "sourceType": "module"
   },
 
   "env": {
@@ -12,7 +15,8 @@
   },
 
   "plugins": [
-    "standard"
+    "standard",
+    "promise"
   ],
 
   "globals": {
