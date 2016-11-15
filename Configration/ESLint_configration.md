@@ -8,11 +8,11 @@
 
 而ESLint是Nicholas C.Zakas编写的另外一份JavaScript代码规范检测工具，这当然不是重复得造轮子（大神不屑造轮子，大神一般都是重新发现轮子），在使用JSLint的时候，JSLint不是以插件的形式实现的，而是重新包装一个工具，可能Nicholas C.Zakas不喜欢这种方式，其认为代码规范检测工具（ESLint）应该是可插拔（使用插件），可配置的，于是自己便高高兴兴去写ESLint了。
 
-正如ESLint逛网这样定义ESLint：
+正如ESLint官网这样定义ESLint：
 
 > ESLint is designed to be completely configurable, meaning you can turn off every rule and run only with basic syntax validation, or mix and match the bundled rules and your custom rules to make ESLint perfect for your project. 
 
-**ESLint 的设计思想就是高度可配置，在ESLint中你可以开关每一条规则，你可以使用最基本的语法检测，或者结合自定义的规则来使得ESLint完美运行在你的项目中。
+**ESLint 的设计思想就是高度可配置，在ESLint中你可以开关每一条规则，你可以使用最基本的语法检测，或者结合自定义的规则来使得ESLint完美运行在你的项目中。**
 
 #### 二、怎么使用ESLint？
 
